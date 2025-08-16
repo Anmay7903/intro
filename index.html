@@ -543,9 +543,65 @@
                     observer.observe(card);
                 });
             });
+
+            document.addEventListener('copy', (e) => {
+  e.preventDefault();
+  alert('Copying is disabled on this page.');
+});
+
+document.addEventListener('cut', (e) => {
+  e.preventDefault();
+  alert('Cutting is disabled on this page.');
+});
+
+document.addEventListener('paste', (e) => {
+  e.preventDefault();
+  alert('Pasting is disabled on this page.');
+});
+
+document.addEventListener('contextmenu', (e) => {
+  e.preventDefault();
+  alert('Right-click is disabled on this page.');
+});
+
+document.addEventListener('keydown', (e) => {
+  if (
+    e.key === 'F12' ||
+    (e.ctrlKey && e.shiftKey && ['I', 'C', 'J'].includes(e.key)) ||
+    (e.ctrlKey && e.key === 'u')
+  ) {
+    e.preventDefault();
+    alert('Developer tools and view source are disabled.');
+  }
+});
+
+document.addEventListener('dragstart', (e) => {
+  e.preventDefault();
+  alert('Dragging content is disabled.');
+});
+
+document.body.style.userSelect = 'none';
+document.body.style.webkitUserSelect = 'none';
+document.body.style.msUserSelect = 'none';
+
+(function() {
+  const debuggerCheck = () => {
+    let time = Date.now();
+    while (Date.now() - time < 100) {}
+  };
+  
+  setInterval(() => {
+    try {
+      debuggerCheck();
+    } catch (e) {
+      console.log('Debugger detected, functionality limited.');
+    }
+  }, 1000);
+})();
         </script>
 </body>
 
 
 </html>
+
 
